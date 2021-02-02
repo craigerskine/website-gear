@@ -6,8 +6,8 @@ Simple cataloging site example.
 
 ## Features
 
-* Unlimited groups
-* Unlimited gear
+* Unlimited groups/categories
+* Unlimited gear/hardware
 * Customizable icons and colors
 * Responsive layout (gracefully adjusts layout based on screen size)
 
