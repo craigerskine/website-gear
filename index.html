@@ -1,0 +1,162 @@
+
+<!doctype html>
+<html lang="en" class="bg-gray-900 bg-fixed" style="background-image: url('noise.png');">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>My Gear</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/font-awesome@^4.0/css/font-awesome.min.css" rel="stylesheet" />
+    <style>
+      body { font-family: 'Roboto Mono', monospace; }
+      [v-cloak] { opacity: .0001; }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-gradient-to-b from-gray-800 via-transparent to-black bg-black bg-opacity-25 bg-fixed text-gray-400 md:flex md:flex-col">
+
+    <header class="mx-auto mb-8 py-6 px-4 md:px-16 w-full max-w-screen-lg flex items-center">
+      <a href="/" class="text-white opacity-50 hover:opacity-100 focus:opacity-100 transition duration-300">
+        <!-- LOGO -->
+        <i class="fa fa-fw fa-server fa-3x"></i>
+        <!-- /LOGO -->
+      </a>
+      <h1 class="ml-auto text-right text-lg md:text-2xl font-black">
+        My Gear
+        <small class="md:text-base uppercase tracking-wider block opacity-50">PC &middot; Misc</small>
+      </h1>
+    </header>
+    <main class="mx-auto md:px-8 w-full max-w-screen-lg opacity-100 transition duration-250" v-cloak>
+        <section v-for="(group, index) in rig" :id="group.category.replace(' ', '-').toLowerCase().trim()" class="p-4 xl:p-8">
+        <article class="mb-12">
+          <a :href="'#'+ group.category.replace(' ', '-').toLowerCase().trim()" :class="['text-'+ group.color, 'mb-5 text-xl uppercase flex items-center']">
+            <em class="mr-4 text-5xl"><i :class="['fa fa-fw '+ group.ico]"></i></em>
+            <b class="tracking-widest flex-1 flex items-center justify-center"> <b class="font-black">{{ group.category }}</b> <b class="ml-4 border-t-4 border-dotted border-current flex-1 opacity-25"></b></b>
+          </a>
+          <ul v-if="group.hardware" :class="['lg:pl-16 lg:flex flex-wrap', {'line-through opacity-50': group.category == 'Obsolete'}]">
+            <li v-for="(hardware, index) in group.hardware" class="mb-6 py-2 lg:w-1/2">
+              <a :href="hardware.link" :class="['hover:bg-'+ group.color, 'focus:bg-'+ group.color, 'hover:text-'+ group.color, 'focus:text-'+ group.color, 'py-2 flex space-x-4 bg-transparent hover:bg-opacity-10 focus:bg-opacity-10 rounded transition duration-300 group']">
+                <b class="w-1/3 font-black tracking-wider text-right uppercase group-hover:text-white opacity-50">
+                  <b class="text-xs">{{ hardware.type }}</b>
+                  <b v-if="hardware.soon" class="text-sm uppercase leading-none tracking-wider block">
+                    <small class="px-1 py-px font-black text-yellow-400 ring-1 ring-current ring-inset inline-block animate-pulse">Preordered</small>
+                  </b>
+                </b>
+                <div :class="['border-'+ group.color, 'mt-2 border w-2 h-2 rounded-full relative top-px']"></div>
+                <i class="not-italic md:tracking-tight flex-1">
+                  {{ hardware.name }}
+                  <b v-if="hardware.sub" class="text-sm uppercase leading-none tracking-wider flex flex-wrap">
+                    <small v-for="(sub, index) in hardware.sub" class="mb-1 mr-1 px-1 py-px font-black text-current opacity-50 block ring-1 ring-current ring-inset">{{ sub.name }}</small>
+                  </b>
+                </i>
+              </a>
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <footer class="mt-auto mx-auto p-4 md:px-16 w-full max-w-screen-lg text-gray-500 font-black text-xs">
+      <ul class="lg:flex">
+        <li class="inline">Site provided by <a href="http://qrayg.com/" class="opacity-75 hover:opacity-100 transition duration-500">qrayg</a> <b class="mx-1 lg:hidden">&middot;</b></li>
+        <li class="ml-auto inline">Crafted with <svg xmlns="http://www.w3.org/2000/svg" class="mx-1 text-red-500 inline-block align-top" width="16" height="16" viewBox="0 0 16 16" role="img" aria-labelledby="foot-love"><title id="foot-love">Love</title><polygon class="fill-current" fill-rule="evenodd" points="8 6 12 2 16 6 8 14 0 6 4 2"></polygon></svg></li>
+      </ul>
+    </footer>
+
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.min.js"></script>
+    <script>
+      const router = new VueRouter({
+        mode: 'history',
+        scrollBehavior: function(to, from, savedPosition) {
+          if (to.hash) {
+            return {
+              selector: to.hash,
+              behavior: 'smooth',
+            }
+          } else {
+            return {x: 0, y: 0}
+          }
+        }
+      });
+
+      // data
+      var app = new Vue({
+        el: 'main',
+        router: router,
+        data: {
+          rig: [
+            {
+              category: 'PC',
+              ico: 'fa-windows',
+              color: 'blue-400',
+              hardware: [
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', soon: true, },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', soon: true, },
+              ]
+            },
+            {
+              category: 'Accessories',
+              ico: 'fa-television',
+              color: 'red-400',
+              hardware: [
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+              ]
+            },
+            {
+              category: 'Keyboards',
+              ico: 'fa-keyboard-o',
+              color: 'green-500',
+              hardware: [
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+              ]
+            },
+            {
+              category: 'Streaming',
+              ico: 'fa-twitch',
+              color: 'purple-500',
+              hardware: [
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+              ]
+            },
+            {
+              category: 'Music',
+              ico: 'fa-music',
+              color: 'yellow-400',
+              hardware: [
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
+              ]
+            },
+            // {
+            //   category: 'Obsolete',
+            //   ico: 'fa-hourglass-end',
+            //   color: 'white opacity-25',
+            //   hardware: [
+            //     { Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', soon: true, },
+            //     ...
+            //   ]
+            // },
+          ]
+        }
+      });
+    </script>
+
+  </body>
+</html>
