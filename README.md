@@ -6,6 +6,7 @@ Simple cataloging site example.
 
 ## Features
 
+* Self contained (uses CDN for CSS and JS frameworks)
 * Unlimited categories
 * Unlimited hardware
 * Customizable icons and colors
@@ -22,5 +23,9 @@ Keep in mind that after you commit a change, it may take a few minutes for the h
 
 ----
 
+## Notes
+
 * Use [Font Awesome v4](https://fontawesome.com/v4.7.0/icons/) icon names to replace icons... `fa-cogs`, `fa-battery`, etc.
 * Use [Tailwind v2](https://tailwindcss.com/docs/customizing-colors) color names to adjust color schemes... `pink-500`, `yellow-200`, etc.
+* To apply the preordered tag, use `soon: true` somewhere in the root hardware line item.
+* There is a reserved `Obsolete` category keyword that uses a faded, strikethrough style.
