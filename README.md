@@ -18,6 +18,8 @@ Simple cataloging site example.
     1. After you save this setting it will generate a hosted website that you can view on any internet enabled device
 3. Edit the `index.html` page, specifically the vue data near the bottom of the page to add your own categories, hardware, etc. This uses a similar structure to [JSON](https://www.w3schools.com/js/js_json.asp)
 
+Keep in mind that after you commit a change, it may take a few minutes for the hosted version to pull the update. This is normal and how GitHub pages work by default.
+
 ----
 
 * Use [Font Awesome v4](https://fontawesome.com/v4.7.0/icons/) icon names to replace icons... `fa-cogs`, `fa-battery`, etc.
