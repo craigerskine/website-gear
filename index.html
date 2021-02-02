@@ -94,6 +94,7 @@
               ico: 'fa-windows',
               color: 'blue-400',
               hardware: [
+                // { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', soon: true, },
                 { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
                 { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
                 { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', soon: true, },
@@ -144,15 +145,17 @@
                 { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
               ]
             },
-            // {
-            //   category: 'Obsolete',
-            //   ico: 'fa-hourglass-end',
-            //   color: 'white opacity-25',
-            //   hardware: [
-            //     { Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', soon: true, },
-            //     ...
-            //   ]
-            // },
+            {
+              category: 'Obsolete',
+              ico: 'fa-hourglass-end',
+              color: 'white opacity-25',
+              hardware: [
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+              ]
+            },
           ]
         }
       });
