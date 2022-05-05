@@ -2,7 +2,7 @@
 Simple cataloging site example.
 
 * [DEMO](https://craigerskine.github.io/website-gear/)
-* [Live Example](https://qrayg.com/#gear/)
+* [Live Example](https://qrayg.com/gear/)
 
 ## Features
 
