@@ -1,183 +1,195 @@
 <!doctype html>
-<html lang="en" class="bg-gray-900 bg-fixed" style="background-image: url('noise.png');" hidden>
+<html lang="en" class="bg-gray-900 motion-safe:scroll-smooth" hidden>
 
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>My Gear</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&amp;display=swap" rel="stylesheet" />
-    <style>
-      @media (prefers-reduced-motion: no-preference){
-        html { scroll-behavior: smooth; }
-      }
-    </style>
-    <script src="https://unpkg.com/@fortawesome/fontawesome-free/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@100;400;700;900&display=swap" rel="stylesheet" />
   </head>
 
-  <body class="border(t white opacity-10) min-h-screen bg-gradient-to-b from-gray-800 via-transparent to-bg-gray-900 bg-fixed text-gray-400 md:(flex flex-col) font-mono">
+  <body class="text-gray-400 font-mono">
 
-    <header class="mx-auto mb-8 py-6 px-4 md:px-16 w-full max-w-screen-lg flex items-center">
-      <h1 class="text-3xl font-bold uppercase flex flex-wrap items-center justify-center md:justify-start">
-        <!-- logo -->
-        <i class="mr-5 w-10 h-10 ring(2 current) text-gray-400 relative z-20 rounded-full animate-pulse">
-          <i class="ring(1 current) absolute inset-0 -z-10 rounded-full animate-ping"></i>
-        </i>
-        <!-- /logo -->
-        <span class="flex-1">
-          My Gear
-          <small class="text-base block opacity-50">PC &middot; Mac &middot; Music &middot; Misc</small>
-        </span>
-      </h1>
-    </header>
-    <main class="mx-auto md:px-8 w-full max-w-screen-lg" v-cloak>
-        <section v-for="(group, index) in rig" :id="group.category.replace(' ', '-').toLowerCase().trim()" class="p-4 xl:p-8">
-        <article class="mb-12">
-          <a :href="'#'+ group.category.replace(' ', '-').toLowerCase().trim()" :class="['text-'+ group.color, 'mb-5 text-xl uppercase flex items-center']">
-            <em class="mr-4 text-5xl"><i :class="['fa-fw '+ group.ico]"></i></em>
-            <b class="tracking-widest flex-1 flex items-center justify-center"> <b class="font-black">{{ group.category }}</b> <b class="ml-4 border(t current) flex-1 opacity-25"></b></b>
-          </a>
-          <ul v-if="group.hardware" :class="['lg:pl-16 grid grid-flow-row grid-cols-1 lg:grid-cols-2 gap-6', {'line-through': group.category == 'Obsolete'}]">
-            <li v-for="(hardware, index) in group.hardware">
-              <a :href="hardware.link" :class="['border-'+ group.color, 'hover:bg-'+ group.color, 'focus:bg-'+ group.color, 'hover:text-'+ group.color, 'focus:text-'+ group.color, 'py-2 border-l border-opacity-25 flex space-x-4 bg-transparent hover:bg-opacity-10 focus:bg-opacity-10 transition duration-300 group']">
-                <b class="w-1/3 font-black tracking-wider text-right uppercase group-hover:text-white opacity-50 transition duration-100">
-                  <b class="text-xs">{{ hardware.type }}</b>
-                  <b v-if="hardware.soon" class="text-sm uppercase leading-none tracking-wider block">
-                    <small class="px-1 py-px font-black text-yellow-400 ring(1 current inset) inline-block animate-pulse">Pending</small>
-                  </b>
-                </b>
-                <div :class="['border-'+ group.color, 'mt-2 border w-2 h-2 rounded-full relative top-px']"></div>
-                <i class="not-italic md:tracking-tight flex-1">
-                  {{ hardware.name }}
-                  <b v-if="hardware.sub" class="text-sm uppercase leading-none tracking-wider flex flex-wrap">
-                    <small v-for="(sub, index) in hardware.sub" class="mb-1 mr-1 px-1 py-px font-black text-current opacity-50 block ring(1 current inset)">{{ sub.name }}</small>
-                  </b>
-                </i>
-              </a>
-            </li>
-          </ul>
-        </article>
-      </section>
-    </main>
+    <div class="bg-gradient-to-b from-transparent via-transparent to-gray-800 fixed inset-0"><div class="bg-grid absolute inset-0"></div></div>
 
-    <footer class="mt-auto mx-auto p-4 md:px-16 w-full max-w-screen-lg text-gray-500 font-black text-xs">
-      <ul class="lg:flex">
-        <li class="inline">Site provided by <a href="http://qrayg.com/" class="opacity-75 hover:opacity-100 transition duration-500">qrayg</a> <b class="mx-1 lg:hidden">&middot;</b></li>
-        <li class="ml-auto inline">Crafted with 
-          <svg xmlns="http://www.w3.org/2000/svg" class="-mt-1 mx-1 text-red-500 inline-block stroke-current" width="16" height="12" viewBox="0 0 16 12" role="img" aria-labelledby="footer-heart">
-            <title id="footer-heart">Love</title>
-            <polygon fill="transparent" fill-rule="evenodd" points="8 4 12 0 16 4 8 12 0 4 4 0"></polygon>
-          </svg>
-        </li>
-      </ul>
-    </footer>
+    <div class="app min-h-screen flex(& col) relative" v-cloak>
+      <header class="mx-auto mb-8 py-6 px-4 w-full max-w-screen-lg flex items-center md:(px-16)">
+        <h1 class="text-3xl font-bold uppercase flex flex-wrap items-center justify-center md:justify-start">
+          <!-- logo -->
+          <i class="mr-5 w-10 h-10 ring(2 current) text-gray-400 relative z-20 rounded-full animate-pulse">
+            <i class="ring(1 current) absolute inset-0 -z-10 rounded-full animate-ping"></i>
+          </i>
+          <!-- /logo -->
+          <span class="flex-1">
+            My Gear
+            <small class="text-base block opacity-50">PC &middot; Mac &middot; Music &middot; Misc</small>
+          </span>
+        </h1>
+      </header>
+      <main class="mx-auto w-full max-w-screen-lg md:(px-8)">
+        <section v-for="(group, index) in gear" :id="slug(group.category)" class="p-4 xl:(p-8)">
+          <article class="mb-12">
+            <a :href="'#'+ slug(group.category)" :class="['text-'+ group.color, 'mb-5 text-xl uppercase flex items-center']">
+              <em class="mr-4 text-5xl"><i :class="['fa-fw '+ group.ico]"></i></em>
+              <b class="tracking-widest flex-1 flex items-center justify-center"> <b class="font-black">{{ group.category }}</b> <b class="ml-4 border(t current) flex-1 opacity-25"></b></b>
+            </a>
+            <ul v-if="group.hardware" :class="['grid(& flow-row cols-1) gap-x-6 lg:(pl-16 grid-cols-2)', {'line-through': group.category == 'Obsolete'}]">
+              <li v-for="(hardware, index) in group.hardware" class="flex">
+                <a :href="hardware.link" :class="'border-'+ group.color +' hover:bg-'+ group.color +' focus:bg-'+ group.color +' hover:text-'+ group.color +' focus:text-'+ group.color +' group py-3 px-5 border(l b opacity-25) w-full bg-transparent transition-all hover:(border-l-4 bg-opacity-10) focus:(border-l-4 bg-opacity-10) md:(px-0 flex space-x-4)'">
+                  <b class="font-black tracking-wider uppercase block opacity-80 group-hover:(text-white) group-focus:(text-white) md:(w-1/4 text-right)">
+                    <b class="text-sm">{{ hardware.type }}</b>
+                    <small v-show="hardware.soon" class="uppercase leading-none tracking-wider flex justify-end">
+                      <b class="px-1 py-px font-black text-yellow-300 ring(1 current inset) block relative">Pending</b>
+                    </small>
+                  </b>
+                  <div :class="'border-'+ group.color +' mt-2 border w-2 h-2 rounded-full relative top-px hidden md:(block)'"></div>
+                  <i class="not-italic flex-1 md:(tracking-tight)">
+                    {{ hardware.name }}
+                    <small class="uppercase leading-none tracking-wider flex(& wrap)">
+                      <b v-for="(sub, index) in hardware.sub" class="mb-1 mr-1 py-px font-black text-current opacity-60 inline-block">{{ sub.name }}<i v-if="hardware.sub.length > (index + 1)">, </i></b>
+                    </small>
+                  </i>
+                </a>
+              </li>
+            </ul>
+          </article>
+        </section>
+      </main>
+  
+      <footer class="mt-auto mx-auto p-4 w-full max-w-screen-lg text-gray-500 font-black text-sm md:(px-16)">
+        <ul class="lg:(flex)">
+          <li class="inline">Site provided by <a href="https://qrayg.com/" class="opacity-75 transition hover:(opacity-100)">qrayg</a> <b class="mx-1 lg:hidden">&middot;</b></li>
+          <li class="ml-auto inline">
+            Crafted with 
+            <svg xmlns="http://www.w3.org/2000/svg" class="-mt-1 mx-1 text-red-500 inline-block stroke-current" width="16" height="12" viewBox="0 0 16 12" role="img" aria-labelledby="footer-heart">
+              <title id="footer-heart">Love</title>
+              <polygon fill="transparent" fill-rule="evenodd" points="8 4 12 0 16 4 8 12 0 4 4 0"></polygon>
+            </svg>
+          </li>
+        </ul>
+      </footer>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/combine/npm/twind/twind.umd.js,npm/twind/observe/observe.umd.js,npm/twind/colors/colors.umd.js"></script>
-    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-    <script src="https://unpkg.com/vue-router/dist/vue-router.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/@fortawesome/fontawesome-free/js/all.min.js"></script>
     <script>
-      const router = new VueRouter({
-        mode: 'history',
-        scrollBehavior: function(to, from, savedPosition) {
-          if (to.hash) {
-            return {
-              selector: to.hash,
-            }
-          } else {
-            return {x: 0, y: 0}
-          }
-        }
-      });
-
       // data
-      var app = new Vue({
-        el: 'main',
-        router: router,
-        data: {
-          rig: [
-            {
-              category: 'Some Category',
-              ico: 'fab fa-windows',
-              color: 'blue-400',
-              hardware: [
-                // { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', soon: true, },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', soon: true, },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', soon: true, },
-              ]
-            },
-            {
-              category: 'Another Category',
-              ico: 'fas fa-tv',
-              color: 'red-400',
-              hardware: [
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-              ]
-            },
-            {
-              category: 'Yet Another Category',
-              ico: 'fas fa-keyboard',
-              color: 'green-500',
-              hardware: [
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-              ]
-            },
-            {
-              category: 'Foo Category',
-              ico: 'fab fa-twitch',
-              color: 'purple-500',
-              hardware: [
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-              ]
-            },
-            {
-              category: 'Bar Category',
-              ico: 'fas fa-music',
-              color: 'yellow-400',
-              hardware: [
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'},], link: '#', },
-              ]
-            },
-            {
-              category: 'Obsolete',
-              ico: 'fas fa-business-time',
-              color: 'white opacity-50',
-              hardware: [
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
-                { type: 'Some Type', name: 'Some Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
-              ]
-            },
-          ]
-        }
+      var app = Vue.createApp({
+        data() {
+          return {
+            gear: [
+              {
+                category: 'Some Category',
+                ico: 'fa-brands fa-windows',
+                color: 'blue-400',
+                hardware: [
+                  // { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', soon: true, },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', soon: true, },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', soon: true, },
+                ]
+              },
+              {
+                category: 'Another Category',
+                ico: 'fa-brands fa-apple',
+                color: 'red-400',
+                hardware: [
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                ]
+              },
+              {
+                category: 'Yet Another Category',
+                ico: 'fa-solid fa-keyboard',
+                color: 'green-500',
+                hardware: [
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                ]
+              },
+              {
+                category: 'Stream Setup',
+                ico: 'fa-solid fa-stream',
+                color: 'purple-500',
+                hardware: [
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                ]
+              },
+              {
+                category: 'Music Rig',
+                ico: 'fa-solid fa-music',
+                color: 'yellow-400',
+                hardware: [
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'},], link: '#', },
+                ]
+              },
+              {
+                category: 'Obsolete',
+                ico: 'fa-solid fa-business-time',
+                color: 'white opacity-50',
+                hardware: [
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                  { type: 'Some Type', name: 'Some › Name', sub: [{name: 'Some Tag'}, {name: 'Some Tag'},], link: '#', },
+                ]
+              },
+            ]
+          }
+        },
+        methods: {
+          slug: function(text) {
+            const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìıİłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
+            const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
+            const p = new RegExp(a.split('').join('|'), 'g')
+            return text.toString().toLowerCase()
+              .replace(/\s+/g, '-')                    // Replace spaces with -
+              .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+              .replace(/&/g, '-and-')                  // Replace & with 'and'
+              .replace(/[^\w\-]+/g, '')                // Remove all non-word characters
+              .replace(/\-\-+/g, '-')                  // Replace multiple - with single -
+              .replace(/^-+/, '')                      // Trim - from start of text
+              .replace(/-+$/, '')                      // Trim - from end of text
+          },
+        },
       });
+      app.mount('.app');
 
       // twind
       twind.setup({
         mode: "silent",
         theme: {
-          fontFamily: {
-            mono: ['Roboto Mono', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
-          },
           extend: {
             colors: {
               gray: twindColors.gray,
+              cyan: twindColors.cyan,
+              fuchsia: twindColors.fuchsia,
+              lime: twindColors.lime,
+              orange: twindColors.orange,
+              rose: twindColors.rose,
+              teal: twindColors.teal,
             },
+            fontFamily: (theme) => ({
+              mono: 'Inconsolata,'+ theme('fontFamily.mono'),
+            }),
           },
+        },
+        plugins: {
+          'scroll-smooth': { 'scroll-behavior': 'smooth' },
+          'bg-grid': { 'background-image': 'url("data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 4 4\' width=\'4\' height=\'4\'><rect x=\'0\' y=\'0\' width=\'2\' height=\'2\' fill=\'rgba(5,5,5,.33)\'></rect></svg>")', },
         },
       })
       twind.tw(() => ({
